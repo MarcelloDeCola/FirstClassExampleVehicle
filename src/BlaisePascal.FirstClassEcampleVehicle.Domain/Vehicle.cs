@@ -31,9 +31,7 @@ namespace pascal.Lesson3E.ClassExample.Domain
             private set
             {
                 if (string.IsNullOrWhiteSpace(value) || value.Length != 7)
-                {
                     throw new ArgumentException("The LicencePlate must be long exactly 7 characters.");
-                }
 
                 string UpperCaseLicence = value.ToUpper();
 
@@ -42,25 +40,14 @@ namespace pascal.Lesson3E.ClassExample.Domain
                     char CurrentChar = value[i];
                     switch (i)
                     {
-                        case 0 or 1:
+                        case 0 or 1 or 5 or 6:
                             if (!char.IsDigit(CurrentChar))
-                            {
-                                throw new ArgumentException("the first two chars must be numbers");
-                            }
+                                throw new ArgumentException("the first and last two chars must be numbers");
                             break;
 
                         case 2 or 3 or 4:
                             if (!char.IsLetter(CurrentChar))
-                            {
                                 throw new ArgumentException("the three middle chars must be letters");
-                            }
-                            break;
-
-                        case 5 or 6:
-                            if (!char.IsDigit(CurrentChar))
-                            {
-                                throw new ArgumentException("the last two chars must be numbers");
-                            }
                             break;
                             //il default non lo ho fatto perchè sarebbe impossibile che avvenga come caso
                     }
